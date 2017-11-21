@@ -79,17 +79,25 @@ def readExperimentParameters(filename):
     >>> type(readExperimentParameters('experiments.csv')[1])
     <class 'tuple'>
     """
+    #initialise a list to return
     parameter_list=[]
+
+    #open the .csv and start looking at it
     with open(filename) as csvfile:
+        #This skips the header row of the file
         next(csvfile, None)
         for row in csv.reader(csvfile):
-            if str(row[3]) == "h":
+            #condition to detect if the time is in hours.
+            if str(row[3]) == " h":
+                #each element is added to a tuple, with hours multiplied by 60
                 to_add = (int(row[0]),int(row[1]),int(row[2])*60)
             else:
+                #each element is added to a tuple.
+                #Each element needs to be converted into an integer for it to be used
                 to_add = (int(row[0]),int(row[1]),int(row[2]))
+            #add each new tuple to the list.
             parameter_list.append(to_add)
     return parameter_list
-    # Add code here
 
 
 def singleQueue(alpha, beta, time=480):
