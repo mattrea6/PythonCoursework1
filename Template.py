@@ -118,3 +118,29 @@ def singleQueue(alpha, beta, time=480):
     <class 'int'>
     """
     # Add code here
+    maxQ = 0
+    Q = 1
+    c = 0
+    tarrival = nextTime(alpha)
+    tserve = nextTime(beta)
+    while c < time:
+        if tarrival < tserve:
+            tserve = tserve - tarrival
+            c = c + tarrival
+            Q += 1
+            maxQ = max(maxQ, Q)
+            tarrival = nextTime(alpha)
+        else:
+            tarrival = tarrival - tserve
+            c += tserve
+            Q -= 1
+            tserve = nextTime(beta)
+        while True:
+            if Q != 0:
+                break
+            c = c + tarrival
+            Q += 1
+            maxQ = max(maxQ, Q)
+            tarrival = nextTime(alpha)
+
+    return maxQ
