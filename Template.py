@@ -1,5 +1,6 @@
 import random
 import math
+import csv
 
 
 def nextTime(mean):
@@ -23,7 +24,12 @@ def theoreticalMeanQueueLength(alpha, beta):
     >>> type(theoreticalMeanQueueLength(10, 2))
     <class 'float'>
     """
-    # Add code here
+
+    #If either of these are true, the program will attempt to divide by 0.
+    if beta/alpha == 1 or alpha == 0:
+        return -1
+    #This will only run if there is no 0 division.
+    return (beta/alpha)/(1-(beta/alpha))
 
 
 def checkMean(mean, iterations=10000):
@@ -49,7 +55,15 @@ def checkMean(mean, iterations=10000):
     >>> type(checkMean(31, 5))
     <class 'float'>
     """
-    # Add code here
+    #Initialises a list for all of the values returned from nextTime() to go into
+    mean_list=[]
+    #This will call the nextTime() function however many times it is needed
+    for i in range(iterations):
+        #Values are added to the list
+        mean_list.append(nextTime(mean))
+    #finds the average of all of the values returned from nextTime()
+    average = sum(mean_list)/len(mean_list)
+    return average
 
 
 def readExperimentParameters(filename):
@@ -65,6 +79,16 @@ def readExperimentParameters(filename):
     >>> type(readExperimentParameters('experiments.csv')[1])
     <class 'tuple'>
     """
+    parameter_list=[]
+    with open(filename) as csvfile:
+        next(csvfile, None)
+        for row in csv.reader(csvfile):
+            if str(row[3]) == "h":
+                to_add = (int(row[0]),int(row[1]),int(row[2])*60)
+            else:
+                to_add = (int(row[0]),int(row[1]),int(row[2]))
+            parameter_list.append(to_add)
+    return parameter_list
     # Add code here
 
 
