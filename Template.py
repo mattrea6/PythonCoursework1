@@ -127,7 +127,7 @@ def singleQueue(alpha, beta, time=480):
         if tarrival < tserve:
             tserve = tserve - tarrival
             c = c + tarrival
-            Q += 1
+            Q = Q + 1
             maxQ = max(maxQ, Q)
             tarrival = nextTime(alpha)
         else:
@@ -135,11 +135,9 @@ def singleQueue(alpha, beta, time=480):
             c += tserve
             Q -= 1
             tserve = nextTime(beta)
-        while True:
-            if Q != 0:
-                break
+        while Q == 0:
             c = c + tarrival
-            Q += 1
+            Q = Q + 1
             maxQ = max(maxQ, Q)
             tarrival = nextTime(alpha)
 
