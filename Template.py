@@ -117,24 +117,30 @@ def singleQueue(alpha, beta, time=480):
     >>> type(singleQueue(10, 9, 280))
     <class 'int'>
     """
-    # Add code here
+    #initialise all variables
     maxQ = 0
     Q = 1
     c = 0
-    tarrival = nextTime(alpha)
-    tserve = nextTime(beta)
+    tarrival = 0
+    tserve =
+
+    #This acts as the first "is c < time?" if statement in the flowchart.
     while c < time:
         if tarrival < tserve:
+            #Code for an arrival
             tserve = tserve - tarrival
             c = c + tarrival
             Q = Q + 1
             maxQ = max(maxQ, Q)
             tarrival = nextTime(alpha)
         else:
+            #Code for a service finishing
             tarrival = tarrival - tserve
             c += tserve
             Q -= 1
             tserve = nextTime(beta)
+        #This loop acts as the "is Q = 0?" if statement at the bottom of the flowchat.
+        #if Q is not equal to 0, it returns to the top of the flowchart.
         while Q == 0:
             c = c + tarrival
             Q = Q + 1
