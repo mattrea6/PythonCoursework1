@@ -19,6 +19,6 @@ for i in values:
 
 #This plots and then shows the graph.
 #The values for alpha are used on the x-axis
-#The values obtained from passing alpha into the mean length function are used for the y-axis
+#The values obtained from passing alpha into the mean length function are used for the y-axis.
 plt.plot(values, meanValues)
 plt.show()
