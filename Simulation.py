@@ -122,7 +122,7 @@ def singleQueue(alpha, beta, time=480):
     Q = 1
     c = 0
     tarrival = 0
-    tserve =
+    tserve = 0
 
     #This acts as the first "is c < time?" if statement in the flowchart.
     while c < time:
